@@ -1,0 +1,1993 @@
+<!doctype html>
+<html lang="pt-BR" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Rede Empresarial Brasileira</title>
+<style>:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 14px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, "Segoe UI", sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 10px);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 17'%3E%3Cpath d='M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z'/%3E%3C/svg%3E");
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html > body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: var(--visualize-paint-gutter, 0px);
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+.cursor-interaction {
+  cursor: var(--cursor-interaction, pointer);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: var(--cursor-interaction, pointer);
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive > .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align="right"]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align="center"]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget > :not(.card, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls > .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls > .form-label > :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn,
+.nav-link {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: var(--cursor-interaction, pointer);
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover,
+.nav-link:not(:disabled):not([aria-disabled="true"]):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type="file"] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type="file"]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type="file"]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type="color"] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: "";
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type="radio"] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type="radio"]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: "";
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed="true"],
+  [aria-selected="true"],
+  .is-selected
+) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed="true"], [aria-selected="true"], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .btn,
+  .nav-link,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, var(--font-size-normal));
+  }
+
+  .form-control[type="file"]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type="color"] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="time"],
+    [type="week"]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: "";
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+
+  .form-range::-webkit-slider-runnable-track {
+    height: 44px;
+  }
+
+  .form-range::-moz-range-track {
+    height: 44px;
+  }
+
+  .form-range::-webkit-slider-thumb {
+    margin-top: 12px;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget > svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html>body{padding:0}</style>
+</head>
+<body>
+<script type="application/json" id="codex-visualization-widget-state">__CODEX_VISUALIZATION_WIDGET_STATE__</script>
+<script>(() => {
+  const root = document.documentElement;
+  const mediaQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
+  const apply = Reflect.apply;
+  const isArray = Array.isArray;
+  const hasOwn = Object.hasOwn;
+  const parentWindow = globalThis.parent;
+  const stringify = JSON.stringify;
+  const parse = JSON.parse;
+  const encode = TextEncoder.prototype.encode.bind(new TextEncoder());
+  const initialStateElement = document.getElementById(
+    "codex-visualization-widget-state",
+  );
+  const initialGlobals = parse(initialStateElement?.textContent ?? "{}");
+  initialStateElement?.remove();
+  /** @type {Record<string, unknown> | null} */
+  let state = initialGlobals.widgetState ?? null;
+  const statePersistence = initialGlobals.statePersistence ?? "none";
+  let nextStateRequestId = 0;
+  /** @type {Map<number, { resolve: () => void; reject: (error: Error) => void; timeout: ReturnType<typeof globalThis.setTimeout>; serializedState: string }>} */
+  const pendingStateWrites = new Map();
+  const persistenceError = () =>
+    Object.assign(
+      new Error("The host could not persist the widget state update"),
+      {
+        code: -32000,
+        data: { code: "widget_state_persistence_failed", retryable: false },
+      },
+    );
+  /**
+   * @param {object} prototype
+   * @param {string} property
+   */
+  const getPrototypeGetter = (prototype, property) => {
+    // oxlint-disable-next-line typescript/unbound-method -- invoked through captured Reflect.apply
+    const getter = Object.getOwnPropertyDescriptor(prototype, property)?.get;
+    if (getter == null) {
+      throw new Error(`Missing ${property} getter`);
+    }
+    return getter;
+  };
+  const getMessageData = getPrototypeGetter(MessageEvent.prototype, "data");
+  const getMessagePorts = getPrototypeGetter(MessageEvent.prototype, "ports");
+  const getMessageSource = getPrototypeGetter(MessageEvent.prototype, "source");
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const addHostMessageListener = MessagePort.prototype.addEventListener;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const postHostMessage = MessagePort.prototype.postMessage;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const startHostPort = MessagePort.prototype.start;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const stopMessagePropagation = Event.prototype.stopImmediatePropagation;
+  /** @type {MessagePort | null} */
+  let hostPort = null;
+  const postToHost = (type, payload) => {
+    if (hostPort != null) {
+      apply(postHostMessage, hostPort, [{ type, ...payload }]);
+    }
+  };
+  const openExternal = ({ href }) => {
+    if (globalThis.navigator.userActivation?.isActive === true) {
+      postToHost("open-external", { href });
+    }
+  };
+  const sendFollowUpMessage = ({ context, prompt, title }) => {
+    if (globalThis.navigator.userActivation?.isActive === true) {
+      postToHost("follow-up", { context, prompt, title });
+    }
+    return Promise.resolve();
+  };
+  /**
+   * @param {Record<string, unknown> | ((previous: Record<string, unknown> | null) => Record<string, unknown>)} next
+   * @returns {Promise<void>}
+   */
+  const setWidgetState = async (next) => {
+    const nextState = typeof next === "function" ? next(state) : next;
+    if (
+      nextState == null ||
+      typeof nextState !== "object" ||
+      isArray(nextState)
+    ) {
+      throw new TypeError("Widget state must be a JSON object");
+    }
+    const inputState = stringify(
+      nextState,
+      (_key, /** @type {unknown} */ value) => {
+        if (
+          typeof value === "undefined" ||
+          typeof value === "function" ||
+          typeof value === "symbol" ||
+          (typeof value === "number" && !Number.isFinite(value))
+        ) {
+          throw new TypeError("Widget state must be a JSON object");
+        }
+        return value;
+      },
+    );
+    const parsedState = parse(inputState);
+    if (
+      parsedState == null ||
+      typeof parsedState !== "object" ||
+      isArray(parsedState)
+    ) {
+      throw new TypeError("Widget state must be a JSON object");
+    }
+    const storedState = {
+      modelContent: null,
+      privateContent: null,
+      ...parsedState,
+    };
+    const serializedState = stringify(storedState);
+    if (encode(serializedState).length > 16 * 1024) {
+      throw new TypeError(
+        "Widget state must be a JSON object of at most 16 KiB",
+      );
+    }
+    if (
+      hasOwn(storedState, "imageIds") &&
+      (!isArray(storedState.imageIds) ||
+        storedState.imageIds.some(
+          (/** @type {unknown} */ id) => typeof id !== "string",
+        ))
+    ) {
+      throw new TypeError("Widget state imageIds must be an array of strings");
+    }
+    if (storedState.imageIds?.length > 0) {
+      throw Object.assign(
+        new TypeError("Visualization state does not support image attachments"),
+        { code: -32602, data: { code: "images_unsupported" } },
+      );
+    }
+    state = storedState;
+    globalThis.openai.widgetState = state;
+    globalThis.dispatchEvent(
+      new CustomEvent("openai:set_globals", {
+        detail: { globals: { widgetState: state } },
+      }),
+    );
+    if (statePersistence === "none") {
+      throw persistenceError();
+    }
+    const id = ++nextStateRequestId;
+    return new Promise((resolve, reject) => {
+      const timeout = globalThis.setTimeout(() => {
+        pendingStateWrites.delete(id);
+        reject(persistenceError());
+      }, 30_000);
+      pendingStateWrites.set(id, { resolve, reject, timeout, serializedState });
+      postToHost("widget-state-write", { id, state: serializedState });
+    });
+  };
+  const syncTheme = () => {
+    const theme = mediaQuery.matches ? "dark" : "light";
+    root.dataset.theme = theme;
+    globalThis.openai = {
+      ...globalThis.openai,
+      openExternal,
+      sendFollowUpMessage,
+      setWidgetState,
+      theme,
+      visualizationStyleVariables: {},
+      visualizationTheme: theme,
+      widgetState: state,
+      statePersistence,
+      stateModelContext: "none",
+    };
+    globalThis.dispatchEvent(
+      new CustomEvent("openai:set_globals", {
+        detail: { globals: globalThis.openai },
+      }),
+    );
+  };
+  const sendHeight = () => {
+    postToHost("height", {
+      height: Math.ceil(
+        Math.max(
+          document.body.scrollHeight,
+          document.body.getBoundingClientRect().height,
+        ),
+      ),
+    });
+  };
+
+  globalThis.addEventListener(
+    "message",
+    (event) => {
+      const data = apply(getMessageData, event, []);
+      const ports = apply(getMessagePorts, event, []);
+      const source = apply(getMessageSource, event, []);
+      if (
+        hostPort != null ||
+        source !== parentWindow ||
+        typeof data !== "object" ||
+        data?.type !== "codex-visualization-initialize" ||
+        !isArray(ports) ||
+        ports.length !== 1
+      ) {
+        return;
+      }
+      apply(stopMessagePropagation, event, []);
+      const nextHostPort = ports[0];
+      try {
+        apply(addHostMessageListener, nextHostPort, [
+          "message",
+          (event) => {
+            const data = apply(getMessageData, event, []);
+            if (typeof data === "object" && data?.type === "measure") {
+              sendHeight();
+            } else if (
+              typeof data === "object" &&
+              data?.type === "widget-state-result"
+            ) {
+              /** @type {unknown} */
+              const id = data.id;
+              if (typeof id !== "number") {
+                return;
+              }
+              const pending = pendingStateWrites.get(id);
+              if (pending != null) {
+                pendingStateWrites.delete(id);
+                globalThis.clearTimeout(pending.timeout);
+                if (data.ok === true) {
+                  pending.resolve();
+                } else {
+                  pending.reject(persistenceError());
+                }
+              }
+            }
+          },
+        ]);
+        apply(startHostPort, nextHostPort, []);
+      } catch {
+        return;
+      }
+      hostPort = nextHostPort;
+      for (const [id, { serializedState }] of pendingStateWrites) {
+        postToHost("widget-state-write", { id, state: serializedState });
+      }
+      sendHeight();
+    },
+    { capture: true },
+  );
+  document.currentScript?.remove();
+  mediaQuery.addEventListener("change", syncTheme);
+  globalThis.addEventListener("click", (event) => {
+    if (event.defaultPrevented) {
+      return;
+    }
+    let element = null;
+    if (event.target instanceof globalThis.Element) {
+      element = event.target;
+    } else if (event.target instanceof globalThis.Node) {
+      element = event.target.parentElement;
+    }
+    const link = element?.closest("a[href]");
+    const href = link?.getAttribute("href");
+    if (href == null) {
+      return;
+    }
+    if (href.startsWith("#")) {
+      let id;
+      try {
+        id = decodeURIComponent(href.slice(1));
+      } catch {
+        return;
+      }
+      const target = id.length === 0 ? root : document.getElementById(id);
+      if (
+        target == null ||
+        globalThis.navigator.userActivation?.isActive !== true
+      ) {
+        return;
+      }
+      event.preventDefault();
+      postToHost("scroll-to", {
+        top: target.getBoundingClientRect().top + globalThis.scrollY,
+      });
+      return;
+    }
+    event.preventDefault();
+    openExternal({ href });
+  });
+  new ResizeObserver(sendHeight).observe(document.body);
+  syncTheme();
+})();
+</script>
+<section id="rede-empresarial-brasileira" aria-labelledby="titulo-rede">
+  <style>
+    #rede-empresarial-brasileira { color: var(--foreground); font-family: inherit; }
+    #rede-empresarial-brasileira .intro { margin: 0 0 12px; max-width: 72ch; }
+    #rede-empresarial-brasileira .intro p { margin: 4px 0; }
+    #rede-empresarial-brasileira .viz-controls { margin-bottom: 14px; padding: 10px 12px; border: 1px solid var(--border); border-radius: calc(var(--radius-lg) + 2px); background: color-mix(in srgb, var(--foreground) 3%, var(--background)); }
+    #rede-empresarial-brasileira .network-layout { display: grid; grid-template-columns: minmax(0, 1fr) 236px; gap: 16px; align-items: start; }
+    #rede-empresarial-brasileira .graph-wrap { min-width: 0; }
+    #rede-empresarial-brasileira .graph-frame { position: relative; overflow: hidden; border: 1px solid var(--border); border-radius: calc(var(--radius-lg) + 2px); background: color-mix(in srgb, var(--foreground) 3%, var(--background)); box-shadow: 0 1px 2px color-mix(in srgb, var(--foreground) 5%, transparent), 0 14px 30px -22px color-mix(in srgb, var(--foreground) 35%, transparent); }
+    #rede-empresarial-brasileira .network-svg { width: 100%; height: auto; min-height: 480px; display: block; cursor: grab; touch-action: none; }
+    #rede-empresarial-brasileira .network-svg:active { cursor: grabbing; }
+    #rede-empresarial-brasileira .node { cursor: pointer; }
+    #rede-empresarial-brasileira .graph-zoom { position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 5px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--popover); box-shadow: 0 4px 14px -6px color-mix(in srgb, var(--foreground) 25%, transparent); }
+    #rede-empresarial-brasileira .graph-zoom-btn { display: inline-flex; width: 30px; height: 30px; align-items: center; justify-content: center; padding: 0; border: 1px solid transparent; border-radius: var(--radius); background: transparent; color: var(--foreground); cursor: var(--cursor-interaction, pointer); }
+    #rede-empresarial-brasileira .graph-zoom-btn:hover { background: color-mix(in srgb, var(--foreground) 8%, var(--popover)); }
+    #rede-empresarial-brasileira .graph-zoom-btn:active { transform: scale(.93); }
+    #rede-empresarial-brasileira .graph-zoom-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
+    #rede-empresarial-brasileira .graph-zoom-divider { width: 20px; margin: 2px 0; border-top: 1px solid var(--border); }
+    #rede-empresarial-brasileira .graph-zoom-level { min-width: 42px; padding: 2px 0; font-size: var(--font-size-small); line-height: var(--line-height-small); color: var(--muted-foreground); text-align: center; font-variant-numeric: tabular-nums; user-select: none; }
+    #rede-empresarial-brasileira .link { stroke: var(--border); stroke-opacity: .9; }
+    #rede-empresarial-brasileira .link.rel-controle { stroke: var(--viz-series-1); }
+    #rede-empresarial-brasileira .link.rel-executivo { stroke: var(--viz-series-2); }
+    #rede-empresarial-brasileira .link.rel-conselho { stroke: var(--viz-series-3); stroke-dasharray: 4 3; }
+    #rede-empresarial-brasileira .link.rel-institucional { stroke: var(--muted-foreground); stroke-dasharray: 2 3; }
+    #rede-empresarial-brasileira .node text { fill: var(--foreground); pointer-events: none; font-size: 11px; }
+    #rede-empresarial-brasileira .node .sub { fill: var(--muted-foreground); font-size: 10px; }
+    #rede-empresarial-brasileira .node-person circle { fill: color-mix(in srgb, var(--viz-series-1) 20%, transparent); stroke: var(--viz-series-1); }
+    #rede-empresarial-brasileira .node-empresa rect { fill: color-mix(in srgb, var(--viz-series-2) 13%, transparent); stroke: color-mix(in srgb, var(--viz-series-2) 50%, var(--border)); }
+    #rede-empresarial-brasileira .node-institution polygon { fill: color-mix(in srgb, var(--viz-series-3) 15%, transparent); stroke: var(--viz-series-3); }
+    #rede-empresarial-brasileira .node.is-dim { opacity: .16; }
+    #rede-empresarial-brasileira .node.is-selected circle, #rede-empresarial-brasileira .node.is-selected rect, #rede-empresarial-brasileira .node.is-selected polygon { stroke: var(--foreground); stroke-width: 2.5; }
+    #rede-empresarial-brasileira .link.is-dim { opacity: .08; }
+    #rede-empresarial-brasileira .link.is-highlight { stroke-width: 2.7; opacity: 1; }
+    #rede-empresarial-brasileira .detail { position: sticky; top: 12px; min-height: 172px; }
+    #rede-empresarial-brasileira .detail h2 { margin: 0 0 4px; }
+    #rede-empresarial-brasileira .detail p { margin: 5px 0; }
+    #rede-empresarial-brasileira .detail ul { margin: 8px 0 0; padding-left: 18px; }
+    #rede-empresarial-brasileira .legend { position: absolute; left: 10px; bottom: 10px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin: 0; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--popover); box-shadow: 0 4px 14px -6px color-mix(in srgb, var(--foreground) 25%, transparent); }
+    #rede-empresarial-brasileira .legend-item { display: inline-flex; gap: 7px; align-items: center; white-space: nowrap; }
+    #rede-empresarial-brasileira .shape { display: inline-flex; width: 20px; justify-content: center; }
+    #rede-empresarial-brasileira .line { display: inline-block; width: 20px; border-top: 2px solid var(--border); }
+    #rede-empresarial-brasileira .line.controle { border-color: var(--viz-series-1); }
+    #rede-empresarial-brasileira .line.executivo { border-color: var(--viz-series-2); }
+    #rede-empresarial-brasileira .line.conselho { border-color: var(--viz-series-3); border-top-style: dashed; }
+    #rede-empresarial-brasileira .line.institucional { border-color: var(--muted-foreground); border-top-style: dotted; }
+    #rede-empresarial-brasileira .source-list { margin: 10px 0 0; padding-left: 18px; }
+    #rede-empresarial-brasileira .source-list a { color: inherit; }
+    @media (max-width: 660px) {
+      #rede-empresarial-brasileira .network-layout { grid-template-columns: 1fr; }
+      #rede-empresarial-brasileira .network-svg { min-height: 420px; }
+      #rede-empresarial-brasileira .graph-zoom { top: 8px; right: 8px; }
+      #rede-empresarial-brasileira .legend { position: static; flex-direction: row; flex-wrap: wrap; gap: 6px 14px; padding: 8px 10px; border: 0; border-top: 1px solid var(--border); border-radius: 0; box-shadow: none; background: transparent; }
+    }
+  </style>
+
+  <header class="intro">
+    <h1 id="titulo-rede">Rede empresarial brasileira</h1>
+    <p>Um mapa de vínculos públicos entre 28 empresários, executivos e suas organizações. Pontos redondos são pessoas; retângulos, empresas; losangos, instituições. Arraste os pontos, aproxime e afaste com a roda do mouse, com o gesto de pinça ou pelos botões de zoom no canto do grafo. Selecione um nome ou use os filtros.</p>
+    <p class="text-small text-muted">“Capital” significa aqui posição de controle, gestão, conselho ou conexão institucional — não uma estimativa de patrimônio. O recorte é documental e não presume controle econômico onde a fonte indica apenas atuação profissional ou histórica.</p>
+  </header>
+
+  <div class="viz-controls" aria-label="Controles do grafo">
+    <label class="form-label">Localizar
+      <input id="network-search" class="form-control" type="search" placeholder="Pessoa ou organização">
+    </label>
+    <label class="form-label">Vínculo
+      <select id="relation-filter" class="form-select">
+        <option value="all">Todos os vínculos</option>
+        <option value="controle">Controle / fundação</option>
+        <option value="executivo">Executivo</option>
+        <option value="conselho">Conselho</option>
+        <option value="institucional">Institucional</option>
+      </select>
+    </label>
+    <button id="clear-selection" class="btn" type="button">Ver rede inteira</button>
+  </div>
+
+  <div class="network-layout">
+    <div class="graph-wrap">
+      <div class="graph-frame">
+        <svg class="network-svg" role="img" aria-labelledby="graph-title graph-desc">
+          <title id="graph-title">Grafo de relações empresariais</title>
+          <desc id="graph-desc">Rede interativa de pessoas, empresas e instituições, conectadas por tipos de vínculo documentado.</desc>
+        </svg>
+        <div class="graph-zoom" role="group" aria-label="Zoom do grafo">
+          <button id="zoom-in" class="graph-zoom-btn" type="button" aria-label="Aproximar o grafo" title="Aproximar">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <button id="zoom-out" class="graph-zoom-btn" type="button" aria-label="Afastar o grafo" title="Afastar">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
+          </button>
+          <span class="graph-zoom-divider" aria-hidden="true"></span>
+          <span id="zoom-level" class="graph-zoom-level" aria-live="polite">100%</span>
+          <span class="graph-zoom-divider" aria-hidden="true"></span>
+          <button id="zoom-reset" class="graph-zoom-btn" type="button" aria-label="Recentralizar o grafo" title="Recentralizar">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>
+          </button>
+        </div>
+        <div class="legend text-small" aria-label="Legenda">
+          <span class="legend-item"><span class="shape"><svg width="13" height="13" viewBox="0 0 13 13" aria-hidden="true"><circle cx="6.5" cy="6.5" r="5.2" fill="color-mix(in srgb, var(--viz-series-1) 20%, transparent)" stroke="var(--viz-series-1)"/></svg></span>pessoa</span>
+          <span class="legend-item"><span class="shape"><svg width="15" height="11" viewBox="0 0 15 11" aria-hidden="true"><rect x="1" y="1" width="13" height="9" rx="2" fill="color-mix(in srgb, var(--viz-series-2) 13%, transparent)" stroke="color-mix(in srgb, var(--viz-series-2) 50%, var(--border))"/></svg></span>empresa</span>
+          <span class="legend-item"><span class="shape"><svg width="13" height="13" viewBox="0 0 13 13" aria-hidden="true"><polygon points="6.5,0.9 12.1,6.5 6.5,12.1 0.9,6.5" fill="color-mix(in srgb, var(--viz-series-3) 15%, transparent)" stroke="var(--viz-series-3)"/></svg></span>instituição</span>
+          <span class="legend-item"><i class="line controle"></i>controle / fundação</span>
+          <span class="legend-item"><i class="line executivo"></i>cargo executivo</span>
+          <span class="legend-item"><i class="line conselho"></i>conselho</span>
+          <span class="legend-item"><i class="line institucional"></i>institucional / trajetória</span>
+        </div>
+      </div>
+    </div>
+    <aside class="detail card" aria-live="polite" id="network-detail">
+      <h2>Explore a rede</h2>
+      <p class="text-muted">Selecione um ponto para ver vínculos, natureza do capital e fontes públicas relacionadas.</p>
+    </aside>
+  </div>
+
+  <details class="text-small" style="margin-top: 12px;">
+    <summary>Escopo e fontes do recorte</summary>
+    <p class="text-muted">A visualização prioriza organizações principais, vínculos explicitamente públicos e conexões corporativas compartilhadas. Relações antigas aparecem como “históricas”; elas não indicam cargo ou participação atual. Fontes são abertas ao selecionar um ponto.</p>
+    <ul class="source-list" id="all-sources"></ul>
+  </details>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script>
+  (() => {
+    const root = document.getElementById('rede-empresarial-brasileira');
+    const source = (id, title, url) => ({ id, title, url });
+    const sources = [
+      source('b3-eg','B3: nomeação de Christian Egan','https://www.b3.com.br/pt_br/noticias/b3-anuncia-christian-egan-como-novo-ceo.htm'),
+      source('qms','Perfil público de Marcelo Kayath / QMS Capital','https://economia.uol.com.br/noticias/bloomberg/2016/01/08/marcelo-kayath-deixa-credit-suisse-no-fim-de-marco.htm'),
+      source('vale','Vale: Eduardo Bartolomeo','https://vale.com/pt/quem-somos/lideranca'),
+      source('fischer','Academia Brasileira de Marketing: Eduardo Fischer','https://abramark.com.br/hall-da-fama/eduardo-fischer/'),
+      source('suzano','Suzano: governança e liderança','https://www.suzano.com.br/sobre-a-suzano/governanca-corporativa'),
+      source('bc','Banco Central: Roberto Campos Neto','https://www.bcb.gov.br/estabilidadefinanceira/organograma'),
+      source('uniao','União Química: relatório da administração','https://diariooficial.imprensaoficial.com.br/doflash/prototipo/2020/Mar%C3%A7o/31/empresarial/pdf/pg_0289.pdf'),
+      source('cosan','Cosan: estrutura de negócios','https://www.cosan.com.br/nossos-negocios/'),
+      source('leste','Grupo Leste / Emmanuel Hermann','https://forbes.com.br/forbes-money/2021/05/investimentos-alternativos-florescem-no-brasil-mas-investidor-mira-diversificacao-no-exterior/'),
+      source('fiesp','Fiesp: presidência','https://www.fiesp.com.br/fiesp/'),
+      source('bradesco','Bradesco: liderança','https://banco.bradesco/html/classic/sobre/governanca-corporativa/administracao.shtm'),
+      source('natura','Natura &Co: governança','https://www.naturaeco.com/pt/investidores/governanca-corporativa/'),
+      source('multi','Multi: relações com investidores','https://ri.multilaser.com.br/'),
+      source('ventos','Casa dos Ventos: sobre a empresa','https://casadosventos.com.br/'),
+      source('itau','Itaú Unibanco: administração','https://www.itau.com.br/relacoes-com-investidores/governanca-corporativa/administracao'),
+      source('leo','Leo Madeiras: relatório ESG 2024','https://storage.googleapis.com/landing-leo-digital-marketing/LPs/2024/ESG/pdf/relatorio-esg-2024-completo.pdf'),
+      source('mb','Mercado Bitcoin / 2TM','https://www.mercadobitcoin.com.br/sobre'),
+      source('lumina','Lumina Capital: Daniel Goldberg','https://www.luminacm.com/our-team'),
+      source('agibank','Moody’s Local: Lumina e Agibank','https://moodyslocal.com.br/wp-content/uploads/2025/05/Relatorio-de-Credito-Agibank-2025_vf.pdf'),
+      source('votorantim','Votorantim: governança','https://www.votorantim.com.br/governanca/'),
+      source('abril','Grupo Abril / Fábio Carvalho','https://exame.com/negocios/fabio-carvalho-compra-grupo-abril/'),
+      source('gerdau','Gerdau: conselho de administração','https://www.gerdau.com/br/pt/investidores/governanca-corporativa'),
+      source('renner','Lojas Renner: administração','https://ri.renner.com.br/governanca-corporativa/administracao/'),
+      source('jsl','JSL: estrutura do grupo','https://ri.jsl.com.br/'),
+      source('esfera','Esfera Brasil / João Camargo','https://esferabrasil.com.br/midia/na-midia-esse-comeco-foi-otimo-o-dolar-caindo-a-bolsa-subindo-o-brasil-ficou-muito-barato-afirmou-o-empresario-joao-carlos-camargo-em-entrevista-a-oeste/'),
+      source('cnn','João Camargo e CNN Brasil','https://www.meioemensagem.com.br/gente/joao-camargo-deixa-o-comando-da-cnn-brasil'),
+      source('btg','BTG Pactual: governança','https://www.btgpactual.com/ri/governanca-corporativa'),
+      source('petrobras','Petrobras: histórico de liderança','https://petrobras.com.br/quem-somos'),
+      source('b3-gilson','B3: liderança executiva','https://ri.b3.com.br/governanca-corporativa/administracao/'),
+      source('riachuelo','Grupo Guararapes: relações com investidores','https://ri.riachuelo.com.br/'),
+    ];
+    const S = Object.fromEntries(sources.map(d => [d.id, d]));
+    const people = [
+      ['flavio','Flávio Rocha','varejo de moda','Controle empresarial',['riachuelo']],
+      ['kayath','Marcelo Kayath','mercado financeiro','Capital financeiro',['qms','btg']],
+      ['esteves','André Esteves','banco de investimentos','Capital financeiro',['btg']],
+      ['bartolomeo','Eduardo Bartolomeo','mineração','Gestão corporativa',['vale']],
+      ['fischer','Eduardo Fischer','publicidade','Controle empresarial',['fischer']],
+      ['feffer','David Feffer','papel e celulose','Controle empresarial',['suzano']],
+      ['campos','Roberto Campos Neto','mercado financeiro','Capital institucional',['bc']],
+      ['marques','Fernando de Castro Marques','indústria farmacêutica','Controle empresarial',['uniao']],
+      ['ometto','Rubens Ometto','energia e infraestrutura','Controle empresarial',['cosan']],
+      ['hermann','Emmanuel Hermann','mercado financeiro','Capital financeiro',['leste','btg']],
+      ['skaf','Paulo Skaf','indústria','Capital institucional',['fiesp']],
+      ['trabuco','Luiz Carlos Trabuco','setor bancário','Gestão corporativa',['bradesco']],
+      ['barbosa','Fábio Barbosa','gestão e finanças','Gestão e conselho',['natura','bradesco']],
+      ['ostrowiecki','Alexandre Ostrowiecki','eletrônicos','Controle empresarial',['multi']],
+      ['araripe','Mario Araripe','energia renovável','Controle empresarial',['ventos']],
+      ['maluhy','Milton Maluhy Filho','setor bancário','Gestão corporativa',['itau']],
+      ['seibel','Helio Seibel','madeira e construção','Controle empresarial',['leo']],
+      ['egan','Christian Egan','mercado de capitais','Gestão corporativa',['b3-eg','btg']],
+      ['dagnoni','Roberto Dagnoni','criptomoedas','Controle empresarial',['mb']],
+      ['parente','Pedro Parente','energia e infraestrutura','Gestão e conselho',['petrobras']],
+      ['goldberg','Daniel Goldberg','investimentos','Capital financeiro',['lumina','agibank']],
+      ['ermirio','Fábio Ermírio de Moraes','indústria e investimentos','Controle empresarial',['votorantim']],
+      ['carvalho','Fábio Carvalho','varejo e mídia','Controle empresarial',['abril']],
+      ['richard-gerdau','Richard Gerdau','siderurgia','Controle empresarial',['gerdau']],
+      ['finkelsztain','Gilson Finkelsztain','setor bancário','Gestão corporativa',['b3-gilson']],
+      ['gallo','José Galló','varejo','Gestão e conselho',['renner']],
+      ['simoes','Fernando Simões','logística e infraestrutura','Controle empresarial',['jsl']],
+      ['camargo','João Camargo','articulação empresarial','Capital institucional',['esfera','cnn']]
+    ].map(([id,label,sector,capital,src]) => ({id,label,sector,capital,kind:'person',src}));
+    const org = [
+      ['guararapes','Grupo Guararapes','empresa',['riachuelo']],['riachuelo','Riachuelo','empresa',['riachuelo']],
+      ['qms','QMS Capital','empresa',['qms']],['credit-suisse','Credit Suisse Brasil','empresa',['qms','b3-eg']],['garantia','Banco Garantia','empresa',['qms']],
+      ['btg','BTG Pactual','empresa',['btg']],['vale','Vale','empresa',['vale']],['grupo-fischer','Grupo Fischer','empresa',['fischer']],['fischer-america','Fischer América','empresa',['fischer']],['totalcom','Grupo Totalcom','empresa',['fischer']],
+      ['suzano','Suzano','empresa',['suzano']],['bcb','Banco Central do Brasil','institution',['bc']],['santander','Santander Brasil','empresa',['bc','natura','b3-eg']],
+      ['uniao','União Química','empresa',['uniao']],['biolab','Biolab','empresa',['uniao']],['bionovis','Bionovis','empresa',['uniao']],
+      ['cosan','Cosan','empresa',['cosan']],['raizen','Raízen','empresa',['cosan']],['rumo','Rumo','empresa',['cosan']],['compass','Compass Gás e Energia','empresa',['cosan']],['moove','Moove','empresa',['cosan']],
+      ['leste','Grupo Leste','empresa',['leste']],['bluefit','Bluefit','empresa',['leste']],['fiesp','Fiesp','institution',['fiesp']],['ciesp','Ciesp','institution',['fiesp']],
+      ['bradesco','Bradesco','empresa',['bradesco']],['fundacao-bradesco','Fundação Bradesco','institution',['bradesco']],['natura','Natura &Co','empresa',['natura']],['abril','Grupo Abril','empresa',['abril']],
+      ['multi','Multi (ex-Multilaser)','empresa',['multi']],['ventos','Casa dos Ventos','empresa',['ventos']],['troller','Troller','empresa',['ventos']],['itau','Itaú Unibanco','empresa',['itau']],
+      ['leo','Leo Madeiras','empresa',['leo']],['leo-social','Instituto Leo Social','institution',['leo']],['b3','B3','empresa',['b3-eg','b3-gilson']],['tivio','Tivio Capital','empresa',['b3-eg']],
+      ['mb','Mercado Bitcoin','empresa',['mb']],['2tm','2TM','empresa',['mb']],['petrobras','Petrobras','empresa',['petrobras']],['brf','BRF','empresa',['petrobras']],['bunge','Bunge Brasil','empresa',['petrobras']],
+      ['lumina','Lumina Capital Management','empresa',['lumina']],['farallon','Farallon Capital','empresa',['lumina']],['morgan-stanley','Morgan Stanley Brasil','empresa',['lumina']],['agibank','Agibank','empresa',['agibank']],
+      ['votorantim','Votorantim S.A.','empresa',['votorantim']],['votorantim-cimentos','Votorantim Cimentos','empresa',['votorantim']],['gerdau','Gerdau','empresa',['gerdau']],['instituto-gerdau','Instituto Gerdau','institution',['gerdau']],
+      ['renner','Lojas Renner','empresa',['renner']],['camicado','Camicado','empresa',['renner']],['jsl','JSL','empresa',['jsl']],['movida','Movida','empresa',['jsl']],['vamos','Vamos','empresa',['jsl']],['csbrasil','CS Brasil','empresa',['jsl']],
+      ['esfera','Esfera Brasil','institution',['esfera']],['89','89 Investimentos','empresa',['esfera']],['cnn','CNN Brasil','empresa',['cnn']],['gc2','GC2','empresa',['cnn']],['agencia-infra','Agência iNFRA','empresa',['cnn']]
+    ].map(([id,label,kind,src]) => ({id,label,kind,src}));
+    const E = (source,target,rel,note,src) => ({source,target,rel,note,src});
+    const links = [
+      E('flavio','guararapes','controle','vice-presidente; vínculo familiar-controlador','riachuelo'),E('guararapes','riachuelo','controle','controladora / principal marca','riachuelo'),
+      E('kayath','qms','controle','sócio','qms'),E('kayath','credit-suisse','executivo','ex-presidente no Brasil','qms'),E('kayath','garantia','institucional','trajetória profissional','qms'),
+      E('esteves','btg','controle','sócio sênior / fundador','btg'),E('hermann','btg','institucional','ex-sócio e executivo','leste'),E('egan','btg','institucional','trajetória no mercado de capitais','b3-eg'),
+      E('bartolomeo','vale','executivo','CEO','vale'),E('fischer','grupo-fischer','controle','presidente','fischer'),E('grupo-fischer','fischer-america','controle','agência do grupo','fischer'),E('grupo-fischer','totalcom','controle','grupo de comunicação','fischer'),
+      E('feffer','suzano','conselho','família controladora / conselho','suzano'),E('campos','bcb','executivo','presidente (2019–2024)','bc'),E('campos','santander','institucional','trajetória no mercado financeiro','bc'),
+      E('marques','uniao','controle','presidente','uniao'),E('marques','biolab','controle','grupo familiar / investimentos farmacêuticos','uniao'),E('marques','bionovis','conselho','companhia de biotecnologia','uniao'),
+      E('ometto','cosan','controle','controlador e presidente do conselho','cosan'),E('cosan','raizen','controle','empresa do portfólio','cosan'),E('cosan','rumo','controle','empresa do portfólio','cosan'),E('cosan','compass','controle','empresa do portfólio','cosan'),E('cosan','moove','controle','empresa do portfólio','cosan'),
+      E('hermann','leste','controle','fundador e CEO','leste'),E('leste','bluefit','controle','investimento de private equity; histórico','leste'),E('skaf','fiesp','executivo','presidência','fiesp'),E('skaf','ciesp','executivo','presidência','fiesp'),
+      E('trabuco','bradesco','conselho','presidente do conselho; ex-CEO','bradesco'),E('bradesco','fundacao-bradesco','institucional','fundação mantida pelo grupo','bradesco'),E('barbosa','natura','conselho','presidente do conselho; histórico','natura'),E('barbosa','santander','executivo','ex-presidente','natura'),
+      E('ostrowiecki','multi','controle','fundador / CEO','multi'),E('araripe','ventos','controle','fundador','ventos'),E('araripe','troller','controle','fundador; vínculo histórico','ventos'),E('maluhy','itau','executivo','CEO','itau'),
+      E('seibel','leo','controle','família controladora; ex-presidente','leo'),E('leo','leo-social','institucional','mantenedora / fundadora','leo'),E('egan','b3','executivo','CEO anunciado em 2026','b3-eg'),E('egan','credit-suisse','institucional','trajetória profissional','b3-eg'),E('egan','santander','institucional','trajetória profissional','b3-eg'),E('egan','itau','institucional','trajetória profissional','b3-eg'),E('egan','tivio','institucional','trajetória profissional','b3-eg'),
+      E('dagnoni','2tm','controle','fundador / CEO','mb'),E('2tm','mb','controle','grupo controlador','mb'),E('parente','petrobras','executivo','ex-presidente','petrobras'),E('parente','brf','executivo','ex-CEO','petrobras'),E('parente','bunge','conselho','presidência; histórico','petrobras'),
+      E('goldberg','lumina','controle','CEO, CIO e sócio fundador','lumina'),E('goldberg','farallon','institucional','ex-managing partner','lumina'),E('goldberg','morgan-stanley','executivo','ex-presidente no Brasil','lumina'),E('lumina','agibank','controle','acionista minoritária; Goldberg no conselho','agibank'),E('goldberg','agibank','conselho','membro do conselho','agibank'),
+      E('ermirio','votorantim','controle','família controladora / conselho','votorantim'),E('votorantim','votorantim-cimentos','controle','empresa do grupo','votorantim'),E('carvalho','abril','controle','controlador','abril'),E('richard-gerdau','gerdau','controle','família controladora / conselho','gerdau'),E('gerdau','instituto-gerdau','institucional','instituto empresarial','gerdau'),
+      E('finkelsztain','b3','executivo','CEO; histórico recente','b3-gilson'),E('gallo','renner','conselho','ex-CEO; conselho','renner'),E('renner','camicado','controle','marca do grupo','renner'),E('simoes','jsl','controle','presidente e família controladora','jsl'),E('jsl','movida','controle','empresa do grupo; vínculo histórico','jsl'),E('jsl','vamos','controle','empresa do grupo','jsl'),E('jsl','csbrasil','controle','empresa do grupo','jsl'),
+      E('camargo','esfera','controle','fundador / presidente do conselho','esfera'),E('camargo','89','controle','family office','esfera'),E('camargo','cnn','conselho','sócio e ex-chairman','cnn'),E('camargo','gc2','controle','grupo familiar de mídia','cnn'),E('esfera','agencia-infra','controle','participação / grupo','cnn')
+    ];
+
+    const nodes = [...people, ...org];
+    const byId = new Map(nodes.map(d => [d.id,d]));
+    const svg = d3.select(root.querySelector('.network-svg'));
+    const detail = root.querySelector('#network-detail');
+    const search = root.querySelector('#network-search');
+    const relationFilter = root.querySelector('#relation-filter');
+    const width = 760, height = 560;
+    const MIN_ZOOM = 0.35, MAX_ZOOM = 5, ZOOM_STEP = 1.5;
+    svg.attr('viewBox', `0 0 ${width} ${height}`);
+    const stage = svg.append('g');
+    const zoomLevel = root.querySelector('#zoom-level');
+    const zoom = d3.zoom()
+      .scaleExtent([MIN_ZOOM, MAX_ZOOM])
+      .clickDistance(8)
+      .on('zoom', (ev) => {
+        stage.attr('transform', ev.transform);
+        zoomLevel.textContent = `${Math.round(ev.transform.k * 100)}%`;
+      });
+    svg.call(zoom).on('dblclick.zoom', null);
+    const linkLayer = stage.append('g').attr('aria-hidden','true');
+    const nodeLayer = stage.append('g');
+    const linkEls = linkLayer.selectAll('line').data(links).join('line').attr('class',d=>`link rel-${d.rel}`).attr('stroke-width', d => d.rel === 'controle' ? 1.7 : 1.15);
+    const nodeEls = nodeLayer.selectAll('g').data(nodes).join('g').attr('class',d=>`node node-${d.kind}`).attr('role','button').attr('aria-label',d=>`${d.label}, ${d.kind === 'person' ? d.sector : 'organização'}`).attr('data-tooltip',d=>d.kind === 'person' ? `${d.label} · ${d.capital}` : d.label);
+    nodeEls.each(function(d) {
+      const g=d3.select(this);
+      if (d.kind === 'person') g.append('circle').attr('r', 15);
+      else if (d.kind === 'institution') g.append('polygon').attr('points','0,-17 17,0 0,17 -17,0');
+      else g.append('rect').attr('x',-18).attr('y',-12).attr('width',36).attr('height',24).attr('rx',4);
+      g.append('text').attr('text-anchor','middle').attr('y', d.kind==='person'?30:27).text(short(d.label));
+      if(d.kind==='person') g.append('text').attr('class','sub').attr('text-anchor','middle').attr('y',41).text(short(d.sector,19));
+    });
+    const simulation = d3.forceSimulation(nodes)
+      .force('link',d3.forceLink(links).id(d=>d.id).distance(d=>d.rel==='controle'?76:98).strength(.72))
+      .force('charge',d3.forceManyBody().strength(d=>d.kind==='person'?-410:-180))
+      .force('center',d3.forceCenter(width/2,height/2))
+      .force('collide',d3.forceCollide().radius(d=>d.kind==='person'?45:36).iterations(2));
+    simulation.on('tick', () => {
+      linkEls.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+      nodeEls.attr('transform',d=>`translate(${d.x},${d.y})`);
+    });
+    function drag(sim) { return d3.drag().on('start',(ev,d)=>{ev.sourceEvent.stopPropagation();if(!ev.active)sim.alphaTarget(.22).restart();d.fx=d.x;d.fy=d.y}).on('drag',(ev,d)=>{d.fx=ev.x;d.fy=ev.y}).on('end',(ev,d)=>{if(!ev.active)sim.alphaTarget(0);d.fx=null;d.fy=null}); }
+    nodeEls.call(drag(simulation)).on('click',(ev,d)=>{ev.stopPropagation(); select(d.id);});
+    svg.on('click',()=>select(null));
+    root.querySelector('#clear-selection').addEventListener('click',()=>{search.value='';relationFilter.value='all';select(null);applyFilter()});
+    root.querySelector('#zoom-in').addEventListener('click',()=>svg.transition().duration(240).call(zoom.scaleBy,ZOOM_STEP));
+    root.querySelector('#zoom-out').addEventListener('click',()=>svg.transition().duration(240).call(zoom.scaleBy,1/ZOOM_STEP));
+    root.querySelector('#zoom-reset').addEventListener('click',()=>svg.transition().duration(320).ease(d3.easeCubicOut).call(zoom.transform,d3.zoomIdentity));
+    search.addEventListener('input',applyFilter); relationFilter.addEventListener('change',applyFilter);
+    let selected = null;
+    function short(text,n=23){ return text.length>n?text.slice(0,n-1)+'…':text; }
+    function isVisibleLink(l) { const rel=relationFilter.value; const q=search.value.trim().toLocaleLowerCase('pt-BR'); if(rel!=='all'&&l.rel!==rel)return false; if(!q)return true; const a=byId.get(typeof l.source==='object'?l.source.id:l.source), b=byId.get(typeof l.target==='object'?l.target.id:l.target); return [a.label,b.label,a.sector||'',b.sector||''].join(' ').toLocaleLowerCase('pt-BR').includes(q); }
+    function applyFilter(){ const q=search.value.trim().toLocaleLowerCase('pt-BR'); const vis = new Set(); links.filter(isVisibleLink).forEach(l=>{vis.add(typeof l.source==='object'?l.source.id:l.source);vis.add(typeof l.target==='object'?l.target.id:l.target)}); if(q){nodes.forEach(n=>{if([n.label,n.sector||'',n.capital||''].join(' ').toLocaleLowerCase('pt-BR').includes(q))vis.add(n.id)})} else if(relationFilter.value==='all') nodes.forEach(n=>vis.add(n.id)); nodeEls.classed('is-dim',d=>!vis.has(d.id)); linkEls.classed('is-dim',d=>!isVisibleLink(d)); if(selected)select(selected,true); }
+    function select(id,keep){ selected=id; const visibleLinks=links.filter(isVisibleLink); if(!id){ nodeEls.classed('is-selected',false); linkEls.classed('is-highlight',false); detail.innerHTML='<h2>Explore a rede</h2><p class="text-muted">Selecione um ponto para ver vínculos, natureza do capital e fontes públicas relacionadas.</p>'; return; } const n=byId.get(id); const adjacent=visibleLinks.filter(l=>(typeof l.source==='object'?l.source.id:l.source)===id||(typeof l.target==='object'?l.target.id:l.target)); const neighbour=new Set(adjacent.flatMap(l=>[typeof l.source==='object'?l.source.id:l.source,typeof l.target==='object'?l.target.id:l.target])); nodeEls.classed('is-selected',d=>d.id===id).classed('is-dim',d=>!neighbour.has(d.id)); linkEls.classed('is-highlight',l=>adjacent.includes(l)).classed('is-dim',l=>!adjacent.includes(l)); const relationItems=adjacent.map(l=>{const other=byId.get((typeof l.source==='object'?l.source.id:l.source)===id?(typeof l.target==='object'?l.target.id:l.target):(typeof l.source==='object'?l.source.id:l.source));return `<li><strong>${other.label}</strong> — ${labelRel(l.rel)}${l.note?`: ${l.note}`:''}</li>`}).join('') || '<li>Sem vínculo exibido no filtro atual.</li>'; const srcIds=[...(n.src||[]),...adjacent.map(l=>l.src)].filter(Boolean); const unique=[...new Map(srcIds.map(k=>[k,S[k]])).values()].filter(Boolean); detail.innerHTML=`<h2>${n.label}</h2>${n.kind==='person'?`<p>${n.sector} · <strong>${n.capital}</strong></p>`:'<p>Organização conectada no recorte.</p>'}<p class="text-small text-muted">${adjacent.length} vínculo(s) visível(is)</p><ul>${relationItems}</ul>${unique.length?`<p class="text-small"><strong>Fontes</strong></p><ul class="source-list">${unique.slice(0,4).map(s=>`<li><a href="${s.url}" target="_blank" rel="noopener">${s.title}</a></li>`).join('')}</ul>`:''}`; }
+    function labelRel(v){ return ({controle:'controle / fundação',executivo:'cargo executivo',conselho:'conselho',institucional:'trajetória institucional'})[v]; }
+    root.querySelector('#all-sources').innerHTML=sources.map(s=>`<li><a href="${s.url}" target="_blank" rel="noopener">${s.title}</a></li>`).join('');
+  })();
+  </script>
+</section>
+
+<script src="https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js"></script>
+<script src="https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js"></script>
+<script>
+(() => {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set(["top", "right", "bottom", "left"]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+  let lastPointerWasTouch = false;
+  let pinnedByTouch = false;
+
+  const getTrigger = (event) => {
+    for (const target of event.composedPath()) {
+      if (target?.nodeType === Node.ELEMENT_NODE) {
+        const trigger = target.closest("[data-tooltip]");
+        if (trigger) return trigger;
+      }
+    }
+    return null;
+  };
+  const containsTarget = (trigger, target) =>
+    target?.nodeType != null && trigger.contains(target);
+  const getContent = (trigger) =>
+    trigger.getAttribute("data-tooltip")?.trim() ?? "";
+  const getPlacement = (trigger) => {
+    const placement = trigger.getAttribute("data-tooltip-placement");
+    return tooltipPlacements.has(placement) ? placement : "top";
+  };
+  const getTooltip = () => {
+    if (tooltip == null) {
+      tooltip = document.createElement("div");
+      tooltip.id = tooltipId;
+      tooltip.className = "tooltip";
+      tooltip.setAttribute("role", "tooltip");
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) => {
+    const ids = new Set(
+      (trigger.getAttribute("aria-describedby") ?? "")
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute("aria-describedby");
+    } else {
+      trigger.setAttribute("aria-describedby", [...ids].join(" "));
+    }
+  };
+  const clearOpenTimeout = () => {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) => {
+    clearOpenTimeout();
+    pinnedByTouch = false;
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) => {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              "--tooltip-available-width",
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              "--tooltip-available-height",
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: "fixed",
+    })
+      .then(({ x, y }) => {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = "visible";
+      })
+      .catch(() => {
+        if (activeTrigger === trigger && request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) => {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = "hidden";
+    floating.style.transform = "translate(0, 0)";
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () => {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) => {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() < skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() => {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) => {
+    if (event.pointerType === "touch") {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handlePointer = (event) => {
+    lastPointerWasTouch =
+      event.type === "pointerdown" && event.pointerType === "touch";
+  };
+  const handleTouchClick = (event) => {
+    const isTouch = event.pointerType === "touch" || lastPointerWasTouch;
+    lastPointerWasTouch = false;
+    if (!isTouch || event.detail === 0) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (
+      trigger == null ||
+      !trigger.isConnected ||
+      getContent(trigger).length === 0 ||
+      (pinnedByTouch && activeTrigger === trigger)
+    ) {
+      if (pinnedByTouch) {
+        closeTooltip();
+      }
+      return;
+    }
+    openTooltip(trigger);
+    pinnedByTouch = activeTrigger === trigger;
+    window.setTimeout(() => {
+      if (activeTrigger === trigger && !trigger.isConnected) {
+        closeTooltip(false);
+      }
+    }, 0);
+  };
+  const handleLeave = (event) => {
+    if (pinnedByTouch) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) => {
+    const trigger = getTrigger(event);
+    if (trigger?.matches(":focus-visible")) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) => {
+    lastPointerWasTouch = false;
+    const trigger = getTrigger(event);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handlers = {
+    pointerover: handlePointerOpen,
+    pointerdown: handlePointer,
+    pointercancel: handlePointer,
+    click: handleTouchClick,
+    pointerout: handleLeave,
+    focusin: handleFocusIn,
+    focusout: handleLeave,
+    keydown: handleKeyDown,
+    contextmenu: handleContextMenu,
+  };
+  const roots = new Map();
+  const handledEvents = new WeakSet();
+  const handleEvent = (event) => {
+    if (handledEvents.has(event)) return;
+    handledEvents.add(event);
+    handlers[event.type](event);
+  };
+  const discoverRoots = (node) => {
+    if (node.shadowRoot) listen(node.shadowRoot);
+    for (const element of node.querySelectorAll("*")) {
+      if (element.shadowRoot) listen(element.shadowRoot);
+    }
+  };
+  const listen = (root) => {
+    if (roots.has(root)) return;
+    for (const type of Object.keys(handlers)) root.addEventListener(type, handleEvent);
+    const observer = new window.MutationObserver((records) => {
+      for (const { addedNodes } of records) {
+        for (const node of addedNodes) {
+          if (node.nodeType === Node.ELEMENT_NODE) discoverRoots(node);
+        }
+      }
+      for (const [root, cleanup] of roots) {
+        if (root.host && !root.host.isConnected) {
+          cleanup();
+          roots.delete(root);
+        }
+      }
+      if (activeTrigger && !activeTrigger.isConnected) closeTooltip(false);
+    });
+    observer.observe(root, { childList: true, subtree: true });
+    roots.set(root, () => {
+      observer.disconnect();
+      for (const type of Object.keys(handlers)) root.removeEventListener(type, handleEvent);
+    });
+    discoverRoots(root);
+  };
+  const destroy = () => {
+    closeTooltip(false);
+    lastPointerWasTouch = false;
+    for (const cleanup of roots.values()) cleanup();
+    roots.clear();
+    tooltip = null;
+  };
+
+  // Events between children of one shadow root never reach the document.
+  listen(document);
+  window.addEventListener("pagehide", destroy, { once: true });
+})();
+</script>
+<script id="codex-visualization-tabs">
+(() => {
+  const selector = '.nav[role="tablist"] [role="tab"]';
+  const disabled = ':disabled,[aria-disabled="true"]';
+  const selectTab = (selected) => {
+    const panelId = selected.getAttribute("aria-controls");
+    for (const tab of selected.closest('[role="tablist"]').querySelectorAll('[role="tab"]')) {
+      const active = tab === selected;
+      tab.classList.toggle("active", active);
+      tab.setAttribute("aria-selected", String(active));
+      const id = tab.getAttribute("aria-controls");
+      const panel = id && document.getElementById(id);
+      if (panel != null) {
+        panel.hidden = id !== panelId;
+        if (!panel.hidden && selected.id) {
+          panel.setAttribute("aria-labelledby", selected.id);
+        }
+      }
+    }
+  };
+  const interact = (event) => {
+    const tab = event.target?.closest?.(selector);
+    if (event.defaultPrevented || tab == null || tab.matches(disabled)) {
+      return;
+    }
+    if (event.type === "click") {
+      selectTab(tab);
+      return;
+    }
+    const tabs = Array.from(
+      tab.closest('[role="tablist"]').querySelectorAll('[role="tab"]'),
+    ).filter((candidate) => !candidate.matches(disabled));
+    const current = tabs.indexOf(tab);
+    let next;
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      next = (current + 1) % tabs.length;
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      next = (current + tabs.length - 1) % tabs.length;
+    } else if (event.key === "Home") {
+      next = 0;
+    } else if (event.key === "End") {
+      next = tabs.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    tabs[next].focus();
+    selectTab(tabs[next]);
+  };
+
+  for (const list of document.querySelectorAll('.nav[role="tablist"]')) {
+    const selected =
+      list.querySelector('[role="tab"][aria-selected="true"]') ??
+      list.querySelector('[role="tab"].active') ??
+      list.querySelector('[role="tab"]');
+    if (selected != null) {
+      selectTab(selected);
+    }
+  }
+  document.addEventListener("click", interact);
+  document.addEventListener("keydown", interact);
+  window.addEventListener("pagehide", () => {
+    document.removeEventListener("click", interact);
+    document.removeEventListener("keydown", interact);
+  }, { once: true });
+})();
+</script>
+<script id="codex-visualization-lucide" async src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js"></script>
+<script>
+(() => {
+  const initialize = () => {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById("codex-visualization-lucide")
+    ?.addEventListener("load", initialize, { once: true });
+})();
+</script>
+
+</body>
+</html>
